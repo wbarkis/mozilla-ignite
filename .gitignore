@@ -5,7 +5,6 @@ settings_local.py
 .coverage
 pip-log.txt
 build/
-src/
 graveyard.css
 docs/_gh-pages
 build.py

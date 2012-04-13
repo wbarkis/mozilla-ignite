@@ -116,16 +116,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
-    'django.core.context_processors.csrf',
+    'session_csrf.context_processor',
     'django.contrib.messages.context_processors.messages',
-
     'commons.context_processors.i18n',
     'jingo_minify.helpers.build_ids',
 
     'topics.context_processors.topics',
     'django.core.context_processors.request',
     'innovate.context_processors.app_name',
-    'ignite.context_processors.site_url'
+    'ignite.context_processors.site_url',
+    'django_browserid.context_processors.browserid_form',
 )
 
 TEMPLATE_DIRS = (
@@ -178,11 +178,9 @@ MIDDLEWARE_CLASSES = (
     'commons.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'session_csrf.CsrfMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-
     'commonware.middleware.FrameOptionsHeader',
     'ignite.middleware.ProfileMiddleware',
 
@@ -346,3 +344,6 @@ SITE_FEED_URLS = {
 }
 
 JUDGES_PER_SUBMISSION = 2
+
+# Always generate a CSRF token for anonymous users
+ANON_ALWAYS = True
